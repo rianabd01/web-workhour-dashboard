@@ -6,6 +6,15 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import FieldInput from "@/components/organism/FieldInput";
+import {
+  Form,
+  FormField,
+  FormControl,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 interface PostAJobPage {}
 
@@ -35,6 +44,32 @@ const PostAJob: FC<PostAJobPage> = ({}) => {
       </div>
 
       <Separator />
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="mt-5 space-y-6 pt-6"
+        >
+          <FieldInput title="Job title" subtitle="This is subtitle for input">
+            <FormField
+              control={form.control}
+              name="roles"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      placeholder="halo"
+                      {...field}
+                      className="w-[500px]"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FieldInput>
+        </form>
+      </Form>
     </div>
   );
 };
