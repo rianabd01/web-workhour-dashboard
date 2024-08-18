@@ -79,7 +79,7 @@ const PostAJob: FC<PostAJobPage> = ({}) => {
           >
             <FormField
               control={form.control}
-              name="roles"
+              name="jobType"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -93,20 +93,50 @@ const PostAJob: FC<PostAJobPage> = ({}) => {
                           <Label htmlFor={item}>{item}</Label>
                         </div>
                       ))}
-                      {/* <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="option-one" id="option-one" />
-                        <Label htmlFor="option-one">Option One</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="option-two" id="option-two" />
-                        <Label htmlFor="option-two">Option Two</Label>
-                      </div> */}
                     </RadioGroup>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </FieldInput>
+
+          <FieldInput title="Job range" subtitle="This is subtitle for input">
+            <div className="w-[450px] flex flex-row justify-between items-center">
+              <FormField
+                control={form.control}
+                name="salaryFrom"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder="$10"
+                        {...field}
+                        className="w-[200px]"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <span>To</span>
+
+              <FormField
+                control={form.control}
+                name="salaryTo"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder="$10000"
+                        {...field}
+                        className="w-[200px]"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
           </FieldInput>
         </form>
       </Form>
