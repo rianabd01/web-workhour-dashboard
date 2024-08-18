@@ -13,6 +13,7 @@ import {
   FormControl,
   FormItem,
   FormMessage,
+  FormDescription
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
@@ -58,11 +59,14 @@ const PostAJob: FC<PostAJobPage> = ({}) => {
                 <FormItem>
                   <FormControl>
                     <Input
-                      placeholder="halo"
+                      placeholder="e. g. Frontend Developer"
                       {...field}
                       className="w-[500px]"
                     />
                   </FormControl>
+                  <FormDescription>
+                    at least 3 roles
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
