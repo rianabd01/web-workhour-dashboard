@@ -14,15 +14,27 @@ import {
   FormItem,
   FormMessage,
   FormDescription,
+  FormLabel,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { JOBTYPES } from "@/constants";
+import { useRouter } from "next/navigation";
 
 interface PostAJobPage {}
 
 const PostAJob: FC<PostAJobPage> = ({}) => {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof jobFormSchema>>({
     resolver: zodResolver(jobFormSchema),
     defaultValues: {
@@ -33,9 +45,13 @@ const PostAJob: FC<PostAJobPage> = ({}) => {
   const onSubmit = (val: z.infer<typeof jobFormSchema>) => {
     console.log(val);
   };
+
   return (
     <div>
-      <div className="inline-flex items-center gap-5 hover:text-primary cursor-pointer">
+      <div
+        className="inline-flex items-center gap-5 hover:text-primary cursor-pointer"
+        onClick={() => router.push("/")}
+      >
         <ArrowLeft className="w-7 h-7" />
         <div className="text-lg font-semibold">Post Job</div>
       </div>
@@ -64,7 +80,7 @@ const PostAJob: FC<PostAJobPage> = ({}) => {
                     <Input
                       placeholder="e. g. Frontend Developer"
                       {...field}
-                      className="w-[500px]"
+                      className="w-[450px]"
                     />
                   </FormControl>
                   <FormDescription>at least 3 roles</FormDescription>
@@ -73,6 +89,7 @@ const PostAJob: FC<PostAJobPage> = ({}) => {
               )}
             />
           </FieldInput>
+
           <FieldInput
             title="Choose a Job Type"
             subtitle="Job type to inform job seeker needs"
@@ -137,6 +154,31 @@ const PostAJob: FC<PostAJobPage> = ({}) => {
                 )}
               />
             </div>
+          </FieldInput>
+
+          <FieldInput
+            title="Job categories"
+            subtitle="This is subtitle for input"
+          >
+            <FormField
+              control={form.control}
+              name="categoryId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Job categories</FormLabel>
+                  <Select>
+                    <SelectTrigger className="w-[450px]">
+                      <SelectValue placeholder="Select job categories" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="light">Light</SelectItem>
+                      <SelectItem value="dark">Dark</SelectItem>
+                      <SelectItem value="system">System</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
           </FieldInput>
         </form>
       </Form>
