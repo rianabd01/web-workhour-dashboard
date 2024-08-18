@@ -13,9 +13,12 @@ import {
   FormControl,
   FormItem,
   FormMessage,
-  FormDescription
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { JOBTYPES } from "@/constants";
 
 interface PostAJobPage {}
 
@@ -64,9 +67,42 @@ const PostAJob: FC<PostAJobPage> = ({}) => {
                       className="w-[500px]"
                     />
                   </FormControl>
-                  <FormDescription>
-                    at least 3 roles
-                  </FormDescription>
+                  <FormDescription>at least 3 roles</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FieldInput>
+          <FieldInput
+            title="Choose a Job Type"
+            subtitle="Job type to inform job seeker needs"
+          >
+            <FormField
+              control={form.control}
+              name="roles"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <RadioGroup defaultValue="option-one">
+                      {JOBTYPES.map((item: string, index: number) => (
+                        <div
+                          className="flex items-center space-x-2"
+                          key={index}
+                        >
+                          <RadioGroupItem value={item} id={item} />
+                          <Label htmlFor={item}>{item}</Label>
+                        </div>
+                      ))}
+                      {/* <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="option-one" id="option-one" />
+                        <Label htmlFor="option-one">Option One</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="option-two" id="option-two" />
+                        <Label htmlFor="option-two">Option Two</Label>
+                      </div> */}
+                    </RadioGroup>
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
